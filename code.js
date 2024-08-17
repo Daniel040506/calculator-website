@@ -40,7 +40,7 @@ let operator = "";
 
 let carriedOp = false;
 
-let numbers = Array.from(document.querySelectorAll(".numbers > button"));
+let numbers = Array.from(document.querySelectorAll(".number"));
 
 
 function updateDisplayInput(input) {
@@ -49,11 +49,26 @@ function updateDisplayInput(input) {
         carriedOp=false;
         return;
     }
+
+    if (input === "." && display.textContent.includes(".")) return;
+    if (display.textContent.length > 30) {
+        alert("inputted number is too large");
+        return;
+    }
     display.textContent = display.textContent + input;
 
 }
 
 function updateDisplayTotal(input) {
+
+    input = input.toString();
+
+    if (input.includes(".")) {
+        if (input.slice(input.indexOf(".")).length > 10) {
+            input = Number(input).toFixed(10);
+        }
+    }
+
     display.textContent = input;
 }
 
